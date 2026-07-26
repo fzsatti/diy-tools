@@ -33,9 +33,10 @@ export default function FuelConsumptionCalculator() {
 
   const barData = useMemo(() => {
     if (!valid) return null
+    const step = d < 100 ? 10 : d > 1000 ? 1000 : 100
     const items: { km: number, liters: number, isUser: boolean }[] = []
-    for (let km = 100; km <= d; km += 100) {
-      const exact = Math.abs(km - d) < 0.5
+    for (let km = step; km <= d; km += step) {
+      const exact = Math.abs(km - d) < step / 2
       items.push({ km, liters: (km / 100) * c, isUser: exact })
     }
     const lastExact = items.length > 0 && items[items.length - 1].isUser
@@ -138,8 +139,12 @@ export default function FuelConsumptionCalculator() {
                   <line x1="30" y1="230" x2="290" y2="230" stroke="#e2e8f0" strokeWidth="1" />
 
                   {barData.items.map((item, i) => {
-                    const barW = 280 / Math.max(barData.items.length, 1) - 16
-                    const x = 48 + i * (barW + 16)
+                    const n = barData.items.length
+                    const chartX = 45
+                    const chartW = 250
+                    const gap = 8
+                    const barW = (chartW - (n - 1) * gap) / n
+                    const x = chartX + i * (barW + gap)
                     const h = (item.liters / barData.maxL) * 190
                     const y = 230 - h
                     const color = item.isUser ? '#6366f1' : '#d1d5db'
