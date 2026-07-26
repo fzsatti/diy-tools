@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard'
 import PythagorasCalculator from './pages/PythagorasCalculator'
 import CircleChordCalculator from './pages/CircleChordCalculator'
 import RuleOfThree from './pages/RuleOfThree'
+import FuelConsumptionCalculator from './pages/FuelConsumptionCalculator'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/pythagoras" element={<PythagorasCalculator />} />
         <Route path="/circle-chord" element={<CircleChordCalculator />} />
         <Route path="/rule-of-three" element={<RuleOfThree />} />
+        <Route path="/fuel-consumption" element={<FuelConsumptionCalculator />} />
       </Route>
     </Routes>
   )

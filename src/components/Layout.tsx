@@ -6,6 +6,7 @@ const navItems = [
   { to: '/pythagoras', label: 'Pythagoras Calculator', icon: '△' },
   { to: '/circle-chord', label: 'Circle Chord Calculator', icon: '◉' },
   { to: '/rule-of-three', label: 'Rule of Three', icon: '∷' },
+  { to: '/fuel-consumption', label: 'Fuel Consumption', icon: '⛽' },
 ]
 
 export default function Layout() {

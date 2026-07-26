@@ -52,6 +52,19 @@ export default function Dashboard() {
           </p>
         </Link>
 
+        <Link
+          to="/fuel-consumption"
+          className="group bg-white rounded-2xl border border-gray-200 p-6 hover:border-indigo-300 hover:shadow-md transition-all"
+        >
+          <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+            ⛽
+          </div>
+          <h2 className="text-lg font-semibold text-gray-900 mb-1">Fuel Consumption</h2>
+          <p className="text-sm text-gray-500">
+            Calculate fuel usage and trip cost from distance and your vehicle's consumption rate.
+          </p>
+        </Link>
+
         <div className="bg-white rounded-2xl border border-dashed border-gray-200 p-6 flex items-center justify-center">
           <p className="text-sm text-gray-400">More tools coming soon</p>
         </div>
