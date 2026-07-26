@@ -9,15 +9,17 @@ function fmt(n: number): string {
   return parseFloat(n.toFixed(6)).toString()
 }
 
-
 export default function FuelConsumptionCalculator() {
   const [distance, setDistance] = useState('')
   const [consumption, setConsumption] = useState('7')
   const [gasPrice, setGasPrice] = useState('')
+  const [roundTrip, setRoundTrip] = useState(false)
 
-  const d = parseNum(distance)
+  const rawDistance = parseNum(distance)
   const c = parseNum(consumption)
   const p = parseNum(gasPrice)
+
+  const d = roundTrip ? rawDistance * 2 : rawDistance
 
   const liters = useMemo(() => {
     if (d <= 0 || c <= 0) return null
@@ -87,6 +89,16 @@ export default function FuelConsumptionCalculator() {
               placeholder="Enter vehicle consumption"
             />
           </div>
+
+          <label className="flex items-center gap-3 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={roundTrip}
+              onChange={(e) => setRoundTrip(e.target.checked)}
+              className="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+            <span className="text-sm font-medium text-gray-700">Round trip (way back)</span>
+          </label>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -197,6 +209,9 @@ export default function FuelConsumptionCalculator() {
         <h3 className="text-sm font-medium text-gray-700 mb-2">Formula Breakdown</h3>
         <div className="bg-gray-50 rounded-xl p-4 font-mono text-sm text-gray-700 space-y-1.5">
           <p>fuel (L) = (distance (km) / 100) &middot; consumption (L/100km)</p>
+          {roundTrip && valid && (
+            <p className="text-indigo-600 text-xs">effective distance = {rawDistance} &middot; 2 = {d} km (round trip)</p>
+          )}
           <p className="text-gray-400 text-xs mt-2">Cost (if gas price is given):</p>
           <p className="text-gray-500">cost = fuel (L) &middot; gas price (per L)</p>
 
@@ -213,10 +228,8 @@ export default function FuelConsumptionCalculator() {
               )}
             </div>
           )}
-
         </div>
       </div>
     </div>
   )
 }
-
